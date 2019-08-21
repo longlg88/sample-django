@@ -18,7 +18,7 @@ mkvirtualenv src
 ## rmvirtualenv [virtualenv name] - Remove this virtualenv
 ## workon [virtualenv name] - Move into working virtualenv
 
-
+pip3 install django
 django-admin startproject [project name]
 python3 manage.py runserver 0.0.0.0:8000
 ```

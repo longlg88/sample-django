@@ -1,5 +1,5 @@
 export WORKON_HOME=/root/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS=' -p /usr/bin/python3 '
-export PROJECT_HOME=/root/work/sample-django
+export PROJECT_HOME=/root/demo/wd/sample-django
 source /usr/local/bin/virtualenvwrapper.sh
