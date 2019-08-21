@@ -1,1 +1,2 @@
-__pycache__
+sample/src/__pycache__
+sample/db.sqlite3
