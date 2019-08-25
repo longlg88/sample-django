@@ -1,2 +1,6 @@
-sample/src/__pycache__
-sample/db.sqlite3
+__pycache__
+/static
+db.sqlite3
+*.pyc
+*~
+.DS_Store
