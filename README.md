@@ -1,5 +1,7 @@
 # Sample Django 
 
+[![CircleCI](https://circleci.com/gh/longlg88/sample-django.svg?style=svg)](https://circleci.com/gh/longlg88/sample-django)
+
 ## This project is sample django for deploying kubernetes cluster.
 
 ## 1. Following steps for installing django project in local env
