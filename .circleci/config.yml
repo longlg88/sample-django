@@ -54,20 +54,31 @@ jobs:
           path: test-reports
           destination: test-reports
   deploy:
+#    docker:
+#      - image: circleci/python:2.7
+#    working_directory: ~/app
+#    steps:
+#      - checkout
+#      - run:
+#          name: Deploy via Fabric
+#          command: |
+#            sudo pip install fabric==1.14.0
+#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+#              fab -f .circleci/deploy.py -i ~/.ssh/id_rsa production deploy
+#            else
+#              fab -f .circleci/deploy.py -i ~/.ssh/id_rsa staging deploy
+#            fi
     docker:
-      - image: circleci/python:2.7
-    working_directory: ~/app
+      - image: circleci/golang:1.8
     steps:
-      - checkout
+      - attach_workspace:
+          at: ./artifacts
       - run:
-          name: Deploy via Fabric
+          name: "Publish Release on GitHub"
           command: |
-            sudo pip install fabric==1.14.0
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              fab -f .circleci/deploy.py -i ~/.ssh/id_rsa production deploy
-            else
-              fab -f .circleci/deploy.py -i ~/.ssh/id_rsa staging deploy
-            fi
+            go get github.com/tcnksm/ghr
+            VERSION=$(my-binary --version)
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
 workflows:
   version: 2
   build-deploy:
