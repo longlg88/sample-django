@@ -67,7 +67,7 @@ jobs:
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
   build-with-builder:
     docker:
-      - image: circleci/node
+      - image: circleci/python
     working_directory: ~/works
     steps:
       - checkout
@@ -77,7 +77,6 @@ jobs:
             mkdir target
             curl -sLo target/builder.sh repo.opsnow.io/valve-ctl/builder
             bash ./target/builder.sh
-            npm run build
       - persist_to_workspace:
           root: ~/works
           paths:
