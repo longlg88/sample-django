@@ -72,11 +72,7 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job:
-          filters:
-            branches:
-              only:
-                - master
+      - build:
       - deploy-job:
           requires:
             - build-job
