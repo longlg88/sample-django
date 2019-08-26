@@ -65,6 +65,22 @@ jobs:
             go get github.com/tcnksm/ghr
             VERSION=$(my-binary --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
+  build-with-builder:
+    docker:
+      - image: circleci/python
+    working_directory: ~/works
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: |
+            mkdir target
+            curl -sLo target/builder.sh repo.opsnow.io/valve-ctl/builder
+            bash ./target/builder.sh
+      - persist_to_workspace:
+          root: ~/works
+          paths:
+            - .
   publish:
     docker:
       - image: opspresso/awscli
@@ -108,12 +124,13 @@ workflows:
 #      - deploy:
 #          requires:
 #            - build
+      - build-with-builder
       - publish:
           requires:
-            - build
+            - build-with-builder
       - release:
           requires:
-            - build
+            - build-with-builder
       - docker:
           requires:
-            - build
+            - build-with-builder
