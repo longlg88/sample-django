@@ -1,6 +1,7 @@
 # Sample Django 
 
 [![CircleCI](https://circleci.com/gh/longlg88/sample-django.svg?style=svg)](https://circleci.com/gh/longlg88/sample-django)
+
 [![DockerHub Badge](http://dockeri.co/image/rozen88/sample-django)](https://hub.docker.com/r/rozen88/sample-django)
 
 ## This project is sample django for deploying kubernetes cluster.
