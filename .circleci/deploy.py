@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 
 from fabric.api import env, run, cd, task
 
@@ -41,9 +41,9 @@ def venv(cmd):
 def deploy():
     with cd(env.path):
         run('git pull origin {0}'.format(env.branch))
-        venv('pip3 install -r requirements.txt')
-        venv('python3 manage.py migrate')
-        venv('python3 manage.py collectstatic --noinput')
+        venv('pip install -r requirements.txt')
+        venv('python manage.py migrate')
+        venv('python manage.py collectstatic --noinput')
         run('supervisorctl reread')
         run('supervisorctl update')
         run('supervisorctl restart sample-django')
